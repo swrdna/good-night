@@ -5,9 +5,9 @@ module Api::V1::Private
     setup do
       @user = users(:one)
       @auth_headers = {
-        'HTTP_AUTHORIZATION' => ActionController::HttpAuthentication::Basic.encode_credentials(
-          ENV.fetch('BASIC_AUTH_USERNAME'),
-          ENV.fetch('BASIC_AUTH_PASSWORD')
+        "HTTP_AUTHORIZATION" => ActionController::HttpAuthentication::Basic.encode_credentials(
+          ENV.fetch("BASIC_AUTH_USERNAME"),
+          ENV.fetch("BASIC_AUTH_PASSWORD")
         )
       }
     end
