@@ -20,7 +20,7 @@ jobs:
           bundler-cache: true
 
       - name: Install dependencies
-        run: bundle config set --local without 'development test'
+        run: bundle update net-pop
 
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: bin/brakeman --no-pager
@@ -38,7 +38,7 @@ jobs:
           bundler-cache: true
 
       - name: Install dependencies
-        run: bundle config set --local without 'development test'
+        run: bundle update net-pop
 
       - name: Lint code for consistent style
         run: bin/rubocop -f github
@@ -76,7 +76,7 @@ jobs:
           bundler-cache: true
 
       - name: Install dependencies
-        run: bundle config set --local without 'development test'
+        run: bundle update net-pop
 
       - name: Run tests
         env:
