@@ -28,5 +28,15 @@ module GoodNight
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # Disable test framework
+    # RSpec is already take care of it
+    config.generators do |g|
+      g.test_framework false
+      g.view_specs false
+      g.helper_specs false
+      g.routing_specs false
+      g.controller_specs false
+    end
   end
 end
