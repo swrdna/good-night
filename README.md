@@ -54,10 +54,10 @@ rails db:seed
 rails server
 ```
 
-## Development
+## Documentation
 
-### Running Tests
+### API
 
 ```bash
-rails test
+http://localhost:3000/docs/api
 ```
