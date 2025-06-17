@@ -5,18 +5,19 @@ class SleepSession < ApplicationRecord
 
   validate :no_active_session, on: :create
 
-  def sleep_duration
-    return nil unless start_time && end_time
-
-    duration = end_time - start_time
-    hours = (duration / 3600).floor
-    minutes = ((duration % 3600) / 60).round
-
-    { hours: hours, minutes: minutes }
-  end
+  before_update :set_duration
 
   def is_active?
     end_time.nil?
+  end
+
+  def duration_text
+    return nil if duration.nil?
+
+    hours = duration / 3600
+    minutes = (duration % 3600) / 60
+
+    "#{hours}h #{minutes}m"
   end
 
   private
@@ -26,5 +27,9 @@ class SleepSession < ApplicationRecord
       if last_session && last_session.is_active?
         errors.add(:base, "Cannot create new session while there is an active session")
       end
+    end
+
+    def set_duration
+      self.duration = (end_time - start_time).to_i if end_time_changed? || start_time_changed?
     end
 end
