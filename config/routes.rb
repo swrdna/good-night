@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  mount Rswag::Ui::Engine => '/docs/api'
+  mount Rswag::Api::Engine => '/docs/api'
+
   get "up" => "rails/health#show", as: :rails_health_check
 
   root to: "api/v1/public/public#index"
