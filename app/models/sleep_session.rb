@@ -7,6 +7,8 @@ class SleepSession < ApplicationRecord
 
   before_update :set_duration
 
+  scope :from_last_week, -> { where("created_at >= ?", 1.week.ago) }
+
   def is_active?
     end_time.nil?
   end
