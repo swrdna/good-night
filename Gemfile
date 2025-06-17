@@ -16,7 +16,7 @@ group :development, :test do
   gem "rswag-specs", "~> 2.16"
   gem "rswag-api", "~> 2.16"
   gem "rswag-ui", "~> 2.16"
-  gem 'rspec-rails', '~> 8.0'
+  gem "rspec-rails", "~> 8.0"
 end
 
 gem "dotenv-rails", "~> 3.1", ">= 3.1.8"
