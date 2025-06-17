@@ -2,7 +2,6 @@
 
 module Api::V1::Public
   class UsersController < PublicController
-    # GET /users
     def index
       @users = User.all
 
