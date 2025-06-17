@@ -16,9 +16,9 @@ module Api::V1::Private
 
     test "should create new sleep session" do
       assert_difference("SleepSession.count") do
-        post api_v1_private_clock_in_url(@user), 
-             params: { clock_in: { start_time: Time.current } }, 
-             as: :json, 
+        post api_v1_private_clock_in_url(@user),
+             params: { clock_in: { start_time: Time.current } },
+             as: :json,
              headers: @auth_headers
       end
       assert_response :created
@@ -28,9 +28,9 @@ module Api::V1::Private
       @user.sleep_sessions.create!(start_time: Time.current)
 
       assert_no_difference("SleepSession.count") do
-        post api_v1_private_clock_in_url(@user), 
-             params: { clock_in: { start_time: Time.current } }, 
-             as: :json, 
+        post api_v1_private_clock_in_url(@user),
+             params: { clock_in: { start_time: Time.current } },
+             as: :json,
              headers: @auth_headers
       end
       assert_response :unprocessable_entity

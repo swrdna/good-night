@@ -9,7 +9,7 @@ class CreateUserFollows < ActiveRecord::Migration[7.2]
       t.timestamps null: false
     end
 
-    add_index :user_follows, [:follower_id, :followed_id], unique: true
+    add_index :user_follows, [ :follower_id, :followed_id ], unique: true
     add_check_constraint :user_follows, "follower_id <> followed_id", name: "follower_cannot_follow_self"
   end
 end

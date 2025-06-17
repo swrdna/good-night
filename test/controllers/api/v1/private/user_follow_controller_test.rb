@@ -18,8 +18,8 @@ module Api::V1::Private
     test "should create follow relationship" do
       assert_difference("UserFollow.count") do
         post follow_api_v1_private_user_url(@user, @target_user),
-             params: { target_user_id: @target_user.id }, 
-             as: :json, 
+             params: { target_user_id: @target_user.id },
+             as: :json,
              headers: @auth_headers
       end
       assert_response :created
@@ -28,8 +28,8 @@ module Api::V1::Private
     test "should not create follow relationship for self" do
       assert_no_difference("UserFollow.count") do
         post follow_api_v1_private_user_url(@user, @user),
-             params: { target_user_id: @user.id }, 
-             as: :json, 
+             params: { target_user_id: @user.id },
+             as: :json,
              headers: @auth_headers
       end
       assert_response :unprocessable_entity
@@ -39,9 +39,9 @@ module Api::V1::Private
       UserFollow.create!(follower: @user, followed: @target_user)
 
       assert_no_difference("UserFollow.count") do
-        post follow_api_v1_private_user_url(@user, @target_user), 
-             params: { target_user_id: @target_user.id }, 
-             as: :json, 
+        post follow_api_v1_private_user_url(@user, @target_user),
+             params: { target_user_id: @target_user.id },
+             as: :json,
              headers: @auth_headers
       end
       assert_response :unprocessable_entity
@@ -51,9 +51,9 @@ module Api::V1::Private
       follow = UserFollow.create(follower: @user, followed: @target_user)
 
       assert_difference("UserFollow.count", -1) do
-        delete unfollow_api_v1_private_user_url(@user, @target_user), 
-               params: { target_user_id: @target_user.id }, 
-               as: :json, 
+        delete unfollow_api_v1_private_user_url(@user, @target_user),
+               params: { target_user_id: @target_user.id },
+               as: :json,
                headers: @auth_headers
       end
       assert_response :no_content
@@ -61,8 +61,8 @@ module Api::V1::Private
 
     test "should return not found when destroying non-existent follow" do
       delete unfollow_api_v1_private_user_url(@user, @target_user),
-             params: { target_user_id: @target_user.id }, 
-             as: :json, 
+             params: { target_user_id: @target_user.id },
+             as: :json,
              headers: @auth_headers
       assert_response :not_found
     end

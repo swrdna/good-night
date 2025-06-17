@@ -16,9 +16,9 @@ module Api::V1::Private
     end
 
     test "should update sleep session with end time" do
-      patch api_v1_private_clock_out_url(@user), 
-            params: { clock_out: { end_time: Time.current } }, 
-            as: :json, 
+      patch api_v1_private_clock_out_url(@user),
+            params: { clock_out: { end_time: Time.current } },
+            as: :json,
             headers: @auth_headers
       assert_response :success
     end

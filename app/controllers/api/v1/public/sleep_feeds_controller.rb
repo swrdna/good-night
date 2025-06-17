@@ -6,8 +6,8 @@ module Api::V1::Public
       user = User.find(params[:id])
       @sleeps = SleepSession.where(user_id: user.following_ids)
                             .from_last_week
-                            .includes(:user) 
-                            .order([:duration, :created_at])
+                            .includes(:user)
+                            .order([ :duration, :created_at ])
                             .page(params[:page])
                             .per(100)
 

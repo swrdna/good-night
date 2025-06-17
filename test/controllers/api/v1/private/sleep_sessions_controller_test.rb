@@ -26,17 +26,17 @@ module Api::V1::Private
     end
 
     test "should update sleep_session" do
-      patch api_v1_private_user_sleep_session_url(@user, @sleep_session), 
-            params: { sleep_session: { end_time: @sleep_session.end_time, start_time: @sleep_session.start_time } }, 
-            as: :json, 
+      patch api_v1_private_user_sleep_session_url(@user, @sleep_session),
+            params: { sleep_session: { end_time: @sleep_session.end_time, start_time: @sleep_session.start_time } },
+            as: :json,
             headers: @auth_headers
       assert_response :success
     end
 
     test "should destroy sleep_session" do
       assert_difference("SleepSession.count", -1) do
-        delete api_v1_private_user_sleep_session_url(@user, @sleep_session), 
-               as: :json, 
+        delete api_v1_private_user_sleep_session_url(@user, @sleep_session),
+               as: :json,
                headers: @auth_headers
       end
 
@@ -45,17 +45,17 @@ module Api::V1::Private
 
     test "should not show sleep_session from different user" do
       other_user = users(:two)
-      get api_v1_private_user_sleep_session_url(other_user, @sleep_session), 
-          as: :json, 
+      get api_v1_private_user_sleep_session_url(other_user, @sleep_session),
+          as: :json,
           headers: @auth_headers
       assert_response :not_found
     end
 
     test "should not update sleep_session from different user" do
       other_user = users(:two)
-      patch api_v1_private_user_sleep_session_url(other_user, @sleep_session), 
-            params: { sleep_session: { end_time: Time.current } }, 
-            as: :json, 
+      patch api_v1_private_user_sleep_session_url(other_user, @sleep_session),
+            params: { sleep_session: { end_time: Time.current } },
+            as: :json,
             headers: @auth_headers
 
       assert_response :not_found
