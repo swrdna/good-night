@@ -25,6 +25,7 @@ Rails.application.routes.draw do
           member do
             resources :followers, only: :index
             resources :following, only: :index, controller: "following"
+            resources :sleep_feeds, only: :index
           end
         end
       end

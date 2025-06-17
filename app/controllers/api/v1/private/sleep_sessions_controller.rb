@@ -6,7 +6,10 @@ module Api::V1::Private
     before_action :set_sleep_session, only: %i[ show update destroy ]
 
     def index
-      @sleep_sessions = @user.sleep_sessions.order(:created_at)
+      @sleep_sessions = @user.sleep_sessions
+                             .order(:created_at)
+                             .page(params[:page])
+                             .per(100)
 
       render_json @sleep_sessions
     end

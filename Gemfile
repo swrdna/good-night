@@ -43,3 +43,5 @@ end
 
 gem "dotenv-rails", "~> 3.1", ">= 3.1.8"
 gem "jsonapi-serializer", "~> 2.2"
+gem "kaminari-core", "~> 1.2", ">= 1.2.2"
+gem "kaminari-activerecord", "~> 1.2", ">= 1.2.2"

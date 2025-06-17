@@ -5,7 +5,9 @@ module Api::V1::Private
     before_action :set_user, only: %i[ show update destroy ]
 
     def index
-      @users = User.all
+      @users = User.order(:created_at)
+                   .page(params[:page])
+                   .per(100)
 
       render_json @users
     end

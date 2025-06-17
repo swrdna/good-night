@@ -3,7 +3,9 @@
 module Api::V1::Public
   class UsersController < PublicController
     def index
-      @users = User.all
+      @users = User.order(:created_at)
+                   .page(params[:page])
+                   .per(100)
 
       render_json @users
     end
