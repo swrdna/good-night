@@ -1,24 +1,63 @@
-# README
+![ruby](https://img.shields.io/badge/Ruby-%23CC342D?logo=ruby)
+![rails](https://img.shields.io/badge/Rails-%23CC0000?logo=rubyonrails)
+![psql](https://img.shields.io/badge/PostgreSQL-%234169E1?logo=postgresql&logoColor=%23ffffff)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Good Night - Sleep Tracking Application
 
-Things you may want to cover:
+API service for tracking sleep. Users can record their sleep sessions, follow other users and view following user's sleep activity
 
-* Ruby version
+## Features
 
-* System dependencies
+- Sleep session tracking
+- Sleep duration
+- User following system
+- Sleep feed showing friends' sleep activity
 
-* Configuration
+## Prerequisites
 
-* Database creation
+- Ruby 3.3.3
+- Rails 7.2
+- PostgreSQL
 
-* Database initialization
+## Installation
 
-* How to run the test suite
+1. Clone the repository:
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+git clone https://github.com/swrdna/good-night.git
+cd good-night
+```
 
-* Deployment instructions
+2. Install dependencies:
 
-* ...
+```bash
+bundle install
+```
+
+3. Create .env file:
+
+```bash
+cp .env.example .env
+```
+
+4. Set up the database:
+
+```bash
+rails db:create
+rails db:migrate
+rails db:seed
+```
+
+5. Start the server:
+
+```bash
+rails server
+```
+
+## Development
+
+### Running Tests
+
+```bash
+rails test
+```
