@@ -14,8 +14,8 @@ Rails.application.routes.draw do
             resource :clock_in, only: :create, controller: 'clock_in'
             resource :clock_out, only: :update, controller: 'clock_out'
 
-            post "follow/:target_user_id", to: "user_follow#create"
-            delete "unfollow/:target_user_id", to: "user_follow#destroy"
+            post "follow/:target_user_id", to: "user_follow#create", as: :follow
+            delete "unfollow/:target_user_id", to: "user_follow#destroy", as: :unfollow
           end
         end
       end
