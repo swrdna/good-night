@@ -18,6 +18,7 @@ API service for tracking sleep. Users can record their sleep sessions, follow ot
 - Ruby 3.3.3
 - Rails 7.2
 - PostgreSQL
+- Docker (optional)
 
 ## Installation
 
@@ -54,10 +55,28 @@ rails db:seed
 rails server
 ```
 
+## Running with Docker
+
+1. Create .env file:
+
+```bash
+cp .env.example .env
+```
+
+2. Run docker command:
+
+```bash
+docker compose up
+```
+
+3. Setup database:
+
+```bash
+docker compose exec api bin/rails db:create db:migrate db:seed
+```
+
 ## Documentation
 
 ### API
 
-```bash
-http://localhost:3000/docs/api
-```
+View the complete API documentation at [http://localhost:3000/docs/api](http://localhost:3000/docs/api) when the application is running.
