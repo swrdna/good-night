@@ -18,7 +18,7 @@ RSpec.describe "Clock In", type: :request do
             }
           }
         },
-        required: ["clock_in"]
+        required: [ "clock_in" ]
       }
       response "201", "created" do
         schema type: :object,

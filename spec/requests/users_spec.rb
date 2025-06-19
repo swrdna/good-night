@@ -36,12 +36,12 @@ RSpec.describe "Users", type: :request do
           user: {
             type: :object,
             properties: {
-              name: {type: :string}
+              name: { type: :string }
             },
-            required: ["name"]
-          },
+            required: [ "name" ]
+          }
         },
-        required: ["user"]
+        required: [ "user" ]
       }
 
       response "201", "created" do

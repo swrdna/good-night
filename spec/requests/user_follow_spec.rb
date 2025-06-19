@@ -17,7 +17,7 @@ RSpec.describe "Follow and unfollow user", type: :request do
               type: :object,
               properties: {
                 followed_id: { type: :integer },
-                followed_name: { type: :string },
+                followed_name: { type: :string }
               }
             }
           }

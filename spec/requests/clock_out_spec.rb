@@ -18,7 +18,7 @@ RSpec.describe "Clock Out", type: :request do
             }
           }
         },
-        required: ["clock_out"]
+        required: [ "clock_out" ]
       }
       response "200", "ok" do
         schema type: :object,

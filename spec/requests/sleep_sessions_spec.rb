@@ -46,10 +46,10 @@ RSpec.describe "Users", type: :request do
               start_time: { type: :string },
               end_time: { type: :string }
             },
-            required: ["start_time", "end_time"]
-          },
+            required: [ "start_time", "end_time" ]
+          }
         },
-        required: ["sleep_session"]
+        required: [ "sleep_session" ]
       }
 
       response "200", "ok" do
