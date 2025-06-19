@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-module Api::V1::Public
-  class FollowingController < PublicController
+module Api::V1::Private
+  class FollowingController < PrivateController
     def index
-      @following = User.find(params[:id]).following
+      @following = User.find(params[:user_id]).following
                        .page(params[:page])
                        .per(100)
 

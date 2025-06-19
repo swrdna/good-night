@@ -13,6 +13,10 @@ Rails.application.routes.draw do
       namespace :private do
         resources :users do
           resources :sleep_sessions, except: :create
+          resources :followers, only: :index
+          resources :following, only: :index, controller: "following"
+          resources :sleep_feeds, only: :index
+
           member do
             resource :clock_in, only: :create, controller: "clock_in"
             resource :clock_out, only: :update, controller: "clock_out"
@@ -24,13 +28,8 @@ Rails.application.routes.draw do
       end
 
       namespace :public do
-        resources :users, only: :index do
-          member do
-            resources :followers, only: :index
-            resources :following, only: :index, controller: "following"
-            resources :sleep_feeds, only: :index
-          end
-        end
+        resources :users, only: :index
+        resources :sleep_feeds, only: :index
       end
     end
   end
