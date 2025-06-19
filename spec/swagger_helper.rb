@@ -21,6 +21,15 @@ RSpec.configure do |config|
         title: "Good Night API",
         version: "v1"
       },
+      components: {
+        securitySchemes: {
+          basic_auth: {
+            type: :http,
+            scheme: :basic
+          }
+        }
+      },
+      security: [ { basic_auth: [] } ],
       paths: {},
       servers: [
         {

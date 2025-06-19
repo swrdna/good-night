@@ -3,12 +3,487 @@ openapi: 3.0.1
 info:
   title: Good Night API
   version: v1
+components:
+  securitySchemes:
+    basic_auth:
+      type: http
+      scheme: basic
+security:
+- basic_auth: []
 paths:
+  "/private/users/{id}/clock_in":
+    post:
+      summary: Clock in to record sleep session start time
+      tags:
+      - Sleep Sessions
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  type:
+                    type: string
+                  attributes:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      start_time:
+                        type: string
+                      end_time:
+                        type: string
+                      duration:
+                        type: integer
+                      duration_text:
+                        type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clock_in:
+                  type: object
+                  properties:
+                    start_time:
+                      type: string
+                      format: date_time
+                      example: '2024-06-20T22:00:00Z'
+              required:
+              - clock_in
+  "/private/users/{id}/clock_out":
+    put:
+      summary: Clock put to end the sleep session
+      tags:
+      - Sleep Sessions
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  type:
+                    type: string
+                  attributes:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      start_time:
+                        type: string
+                      end_time:
+                        type: string
+                      duration:
+                        type: integer
+                      duration_text:
+                        type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clock_out:
+                  type: object
+                  properties:
+                    end_time:
+                      type: string
+                      format: date_time
+                      example: '2024-06-20T22:00:00Z'
+              required:
+              - clock_out
+  "/private/users/{id}/sleep_feeds":
+    get:
+      summary: Following user's sleep activity
+      tags:
+      - Sleep Feed
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  type:
+                    type: string
+                  attributes:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      start_time:
+                        type: string
+                      end_time:
+                        type: string
+                      duration:
+                        type: integer
+                      duration_text:
+                        type: string
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          name:
+                            type: string
+  "/public/sleep_feeds":
+    get:
+      summary: All users's sleep activity
+      tags:
+      - Sleep Feed
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  type:
+                    type: string
+                  attributes:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      start_time:
+                        type: string
+                      end_time:
+                        type: string
+                      duration:
+                        type: integer
+                      duration_text:
+                        type: string
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          name:
+                            type: string
+  "/private/users/{id}/sleep_sessions":
+    get:
+      summary: List of user's sleep sessions
+      tags:
+      - Sleep Sessions
+      parameters:
+      - name: id
+        in: path
+        description: user_id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        start_time:
+                          type: string
+                        end_time:
+                          type: string
+                        duration:
+                          type: integer
+                        duration_text:
+                          type: string
+  "/private/users/{user_id}/sleep_sessions/{id}":
+    put:
+      summary: Update existing sleep session
+      tags:
+      - Sleep Sessions
+      parameters:
+      - name: user_id
+        in: path
+        description: user_id
+        required: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        description: sleep_session_id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  type:
+                    type: string
+                  attributes:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      start_time:
+                        type: string
+                      end_time:
+                        type: string
+                      duration:
+                        type: integer
+                      duration_text:
+                        type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sleep_session:
+                  type: object
+                  properties:
+                    start_time:
+                      type: string
+                    end_time:
+                      type: string
+                  required:
+                  - start_time
+                  - end_time
+              required:
+              - sleep_session
+    delete:
+      summary: Delete sleep session
+      tags:
+      - Sleep Sessions
+      parameters:
+      - name: user_id
+        in: path
+        description: user_id
+        required: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        description: sleep_session_id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: no content
+  "/private/users/{id}/follow/{target_user_id}":
+    post:
+      summary: Follow user
+      tags:
+      - Follow
+      parameters:
+      - name: id
+        in: path
+        description: user_id
+        required: true
+        schema:
+          type: integer
+      - name: target_user_id
+        in: path
+        description: target_user_id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  type:
+                    type: string
+                  attributes:
+                    type: object
+                    properties:
+                      followed_id:
+                        type: integer
+                      followed_name:
+                        type: string
+  "/private/users/{id}/unfollow/{target_user_id}":
+    delete:
+      summary: Unfollow user
+      tags:
+      - Unfollow
+      parameters:
+      - name: id
+        in: path
+        description: user_id
+        required: true
+        schema:
+          type: integer
+      - name: target_user_id
+        in: path
+        description: target_user_id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: no content
   "/private/users":
     get:
-      summary: Retrieves list of users
+      summary: List of users
       tags:
       - Users
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+    post:
+      summary: Create a user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  type:
+                    type: string
+                  attributes:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                  required:
+                  - name
+              required:
+              - user
+  "/private/users/{id}/followers":
+    get:
+      summary: List of who follow the current user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        description: user_id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+                    attributes:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+  "/private/users/{id}/following":
+    get:
+      summary: List of who followed by current user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        description: user_id
+        required: true
+        schema:
+          type: integer
       responses:
         '200':
           description: ok
