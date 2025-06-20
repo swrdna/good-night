@@ -42,7 +42,7 @@ RSpec.describe "Follow and unfollow user", type: :request do
       end
 
       response "422", "unprocessed content" do
-        message = ["Follower You are already following this user"]
+        message = [ "Follower You are already following this user" ]
         schema type: :object,
           properties: {
             data: {

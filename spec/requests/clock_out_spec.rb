@@ -44,13 +44,13 @@ RSpec.describe "Clock Out", type: :request do
               }
             }
           }
-          
+
 
         let(:user) { User.create!(name: 'User A') }
         let(:id) { user.id }
         let!(:open_session) { user.sleep_sessions.create!(start_time: 2.hours.ago) }
         let(:clock_out) { { clock_out: { end_time: Time.current.iso8601 } } }
-        
+
         run_test! do
           expect(SleepSession.first.end_time).not_to be_nil
           expect(SleepSession.first.duration).not_to be_nil
@@ -58,7 +58,7 @@ RSpec.describe "Clock Out", type: :request do
       end
 
       response "422", "clock out not processed" do
-        message = ["End time must be greater than start time"]
+        message = [ "End time must be greater than start time" ]
         schema type: :object,
           properties: {
             data: {

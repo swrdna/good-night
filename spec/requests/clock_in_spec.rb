@@ -45,7 +45,7 @@ RSpec.describe "Clock In", type: :request do
               }
             }
           }
-          
+
 
         let(:user) { User.create!(name: 'User A') }
         let(:id) { user.id }
@@ -57,13 +57,13 @@ RSpec.describe "Clock In", type: :request do
       end
 
       response "422", "unprocessable content" do
-        message = ["Cannot create new session while there is an active session"]
+        message = [ "Cannot create new session while there is an active session" ]
         schema type: :object,
           properties: {
             data: {
               type: :object,
               properties: {
-                message: { type: :array, example:  message}
+                message: { type: :array, example:  message }
               }
             }
           }

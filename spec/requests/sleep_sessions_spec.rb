@@ -93,7 +93,7 @@ RSpec.describe "Users", type: :request do
         let(:user_id) { user.id }
         let!(:existing_sleep_session) { SleepSession.create!({ start_time: Time.current, end_time: Time.current+8.hours, user: user, duration: 60 * 60 * 8 }) }
         let(:id) { existing_sleep_session.id }
-        let(:sleep_session) { {sleep_session: { end_time: Time.current+10.hours }} }
+        let(:sleep_session) { { sleep_session: { end_time: Time.current+10.hours } } }
 
         run_test! do |response|
           data = JSON.parse(response.body)
@@ -103,7 +103,7 @@ RSpec.describe "Users", type: :request do
       end
 
       response "422", "unprocessed content" do
-        message = ["End time must be greater than start time"]
+        message = [ "End time must be greater than start time" ]
         schema type: :object,
           properties: {
             data: {
@@ -118,7 +118,7 @@ RSpec.describe "Users", type: :request do
         let(:user_id) { user.id }
         let!(:existing_sleep_session) { SleepSession.create!({ start_time: Time.current, end_time: Time.current+8.hours, user: user, duration: 60 * 60 * 8 }) }
         let(:id) { existing_sleep_session.id }
-        let(:sleep_session) { {sleep_session: { end_time: existing_sleep_session.start_time-3.hours }} }
+        let(:sleep_session) { { sleep_session: { end_time: existing_sleep_session.start_time-3.hours } } }
 
         run_test! do |response|
           data = JSON.parse(response.body)
@@ -127,7 +127,7 @@ RSpec.describe "Users", type: :request do
       end
 
       response "422", "unprocessed content when start_time and end_time nil" do
-        message = ["Start time can't be blank", "End time can't be blank"]
+        message = [ "Start time can't be blank", "End time can't be blank" ]
         schema type: :object,
           properties: {
             data: {
@@ -142,7 +142,7 @@ RSpec.describe "Users", type: :request do
         let(:user_id) { user.id }
         let!(:existing_sleep_session) { SleepSession.create!({ start_time: Time.current, end_time: Time.current+8.hours, user: user, duration: 60 * 60 * 8 }) }
         let(:id) { existing_sleep_session.id }
-        let(:sleep_session) { {sleep_session: { start_time: nil, end_time: nil }} }
+        let(:sleep_session) { { sleep_session: { start_time: nil, end_time: nil } } }
 
         run_test! do |response|
           data = JSON.parse(response.body)

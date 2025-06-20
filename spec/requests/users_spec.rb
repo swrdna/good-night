@@ -29,9 +29,9 @@ RSpec.describe "Users", type: :request do
               }
             }
           }
-      
-        let!(:users) { User.create!([{name: "User A"}, {name: "User B"}]) }
-      
+
+        let!(:users) { User.create!([ { name: "User A" }, { name: "User B" } ]) }
+
         run_test! do |response|
           data = JSON.parse(response.body)
           expect(data["data"].size).to be(User.count)
@@ -88,7 +88,7 @@ RSpec.describe "Users", type: :request do
       end
 
       response "422", "unprocessed content" do
-        message = ["Name can't be blank"]
+        message = [ "Name can't be blank" ]
         schema type: :object,
           properties: {
             data: {
