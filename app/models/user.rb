@@ -15,6 +15,8 @@ class User < ApplicationRecord
   has_many :following, through: :follows_given, source: :followed
   has_many :followers, through: :follows_received, source: :follower
 
+  validates :name, presence: true
+
   def following?(user_id)
     following.exists?(user_id)
   end

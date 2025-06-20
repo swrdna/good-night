@@ -4,6 +4,9 @@ class SleepSession < ApplicationRecord
   belongs_to :user
 
   validate :no_active_session, on: :create
+  validate :end_time_after_start_time
+  validates :start_time, presence: true, on: :update
+  validates :end_time, presence: true, on: :update
 
   before_update :set_duration
 
@@ -28,6 +31,13 @@ class SleepSession < ApplicationRecord
       last_session = user.sleep_sessions.order(start_time: :desc).first
       if last_session && last_session.is_active?
         errors.add(:base, "Cannot create new session while there is an active session")
+      end
+    end
+
+    def end_time_after_start_time
+      return if end_time.blank? || start_time.blank?
+      if end_time <= start_time
+        errors.add(:end_time, "must be greater than start time")
       end
     end
 

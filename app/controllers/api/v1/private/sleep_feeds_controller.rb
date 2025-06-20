@@ -11,7 +11,7 @@ module Api::V1::Private
                             .page(params[:page])
                             .per(100)
 
-      render_json @sleeps
+      render_json @sleeps, serializer: SleepFeedSerializer
     end
   end
 end

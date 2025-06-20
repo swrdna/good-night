@@ -5,7 +5,7 @@ module Api::V1::Private
     before_action :set_user
 
     def update
-      @sleep_session = @user.sleep_sessions.order(start_time: :desc).first
+      @sleep_session = @user.sleep_sessions.order(created_at: :desc).first
 
       if @sleep_session.update(clock_out_params)
         render_json @sleep_session
