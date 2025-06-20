@@ -103,7 +103,7 @@ RSpec.describe "Users", type: :request do
 
         run_test! do |response|
           data = JSON.parse(response.body)
-          expect(data['message']).to eq(message)
+          expect(data["message"]).to eq(message)
           expect(response.status).to eq(422)
         end
       end
@@ -137,9 +137,9 @@ RSpec.describe "Users", type: :request do
           }
         }
 
-        let(:user) { User.create!(name: 'User A') }
+        let(:user) { User.create!(name: "User A") }
         let(:id) { user.id }
-        let(:follower_user) { User.create!(name: 'User B') }
+        let(:follower_user) { User.create!(name: "User B") }
         let!(:follow) { UserFollow.create!(follower: follower_user, followed: user) }
 
         run_test! do |response|
@@ -178,9 +178,9 @@ RSpec.describe "Users", type: :request do
             }
           }
 
-        let(:user) { User.create!(name: 'User A') }
+        let(:user) { User.create!(name: "User A") }
         let(:id) { user.id }
-        let(:followed_user) { User.create!(name: 'User B') }
+        let(:followed_user) { User.create!(name: "User B") }
         let!(:follow) { UserFollow.create!(follower: user, followed: followed_user) }
 
         run_test! do |response|

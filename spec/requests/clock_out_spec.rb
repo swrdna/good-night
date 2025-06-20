@@ -46,7 +46,7 @@ RSpec.describe "Clock Out", type: :request do
           }
 
 
-        let(:user) { User.create!(name: 'User A') }
+        let(:user) { User.create!(name: "User A") }
         let(:id) { user.id }
         let!(:open_session) { user.sleep_sessions.create!(start_time: 2.hours.ago) }
         let(:clock_out) { { clock_out: { end_time: Time.current.iso8601 } } }
@@ -69,14 +69,14 @@ RSpec.describe "Clock Out", type: :request do
             }
           }
 
-        let(:user) { User.create!(name: 'User A') }
+        let(:user) { User.create!(name: "User A") }
         let(:id) { user.id }
         let!(:open_session) { user.sleep_sessions.create!(start_time: 2.hours.ago) }
         let(:clock_out) { { clock_out: { end_time: 3.hours.ago } } }
 
         run_test! do |response|
           data = JSON.parse(response.body)
-          expect(data['message']).to eq(message)
+          expect(data["message"]).to eq(message)
         end
       end
     end

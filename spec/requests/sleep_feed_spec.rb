@@ -40,16 +40,16 @@ RSpec.describe "Sleep Feeds", type: :request do
             }
           }
 
-        let(:user) { User.create!(name: 'User A') }
+        let(:user) { User.create!(name: "User A") }
         let(:id) { user.id }
-        let(:followed_user) { User.create!(name: 'User B') }
+        let(:followed_user) { User.create!(name: "User B") }
         let!(:follow) { UserFollow.create!(follower: user, followed: followed_user) }
         let!(:sleep_session) { SleepSession.create!({ start_time: Time.current, end_time: Time.current+8.hours, user: followed_user, duration: 60 * 60 * 8 }) }
 
         run_test! do |response|
           data = JSON.parse(response.body)
           expect(data.size).to be(1)
-          expect(data["data"][0]['attributes']['user']['id']).to be(followed_user.id)
+          expect(data["data"][0]["attributes"]["user"]["id"]).to be(followed_user.id)
         end
       end
     end
@@ -91,13 +91,13 @@ RSpec.describe "Sleep Feeds", type: :request do
             }
           }
 
-        let(:user) { User.create!(name: 'User A') }
+        let(:user) { User.create!(name: "User A") }
         let!(:sleep_session) { SleepSession.create!({ start_time: Time.current, end_time: Time.current+8.hours, user: user, duration: 60 * 60 * 8 }) }
 
         run_test! do |response|
           data = JSON.parse(response.body)
           expect(data.size).to be(1)
-          expect(data["data"][0]['attributes']['user']['id']).to be(user.id)
+          expect(data["data"][0]["attributes"]["user"]["id"]).to be(user.id)
         end
       end
     end

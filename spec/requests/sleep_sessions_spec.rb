@@ -33,7 +33,7 @@ RSpec.describe "Users", type: :request do
           }
         }
 
-        let(:user) { User.create!(name: 'User A') }
+        let(:user) { User.create!(name: "User A") }
         let(:id) { user.id }
         let!(:sleep_session) { SleepSession.create!({ start_time: Time.current, end_time: Time.current+8.hours, user: user, duration: 60 * 60 * 8 }) }
 
@@ -89,7 +89,7 @@ RSpec.describe "Users", type: :request do
             }
           }
 
-        let(:user) { User.create!(name: 'User A') }
+        let(:user) { User.create!(name: "User A") }
         let(:user_id) { user.id }
         let!(:existing_sleep_session) { SleepSession.create!({ start_time: Time.current, end_time: Time.current+8.hours, user: user, duration: 60 * 60 * 8 }) }
         let(:id) { existing_sleep_session.id }
@@ -98,7 +98,7 @@ RSpec.describe "Users", type: :request do
         run_test! do |response|
           data = JSON.parse(response.body)
           expect(data.size).to be(1)
-          expect(data["data"]['attributes']['duration']).to be(60 * 60 * 10)
+          expect(data["data"]["attributes"]["duration"]).to be(60 * 60 * 10)
         end
       end
 
@@ -114,7 +114,7 @@ RSpec.describe "Users", type: :request do
             }
           }
 
-        let(:user) { User.create!(name: 'User A') }
+        let(:user) { User.create!(name: "User A") }
         let(:user_id) { user.id }
         let!(:existing_sleep_session) { SleepSession.create!({ start_time: Time.current, end_time: Time.current+8.hours, user: user, duration: 60 * 60 * 8 }) }
         let(:id) { existing_sleep_session.id }
@@ -122,7 +122,7 @@ RSpec.describe "Users", type: :request do
 
         run_test! do |response|
           data = JSON.parse(response.body)
-          expect(data['message']).to eq(message)
+          expect(data["message"]).to eq(message)
         end
       end
 
@@ -138,7 +138,7 @@ RSpec.describe "Users", type: :request do
             }
           }
 
-        let(:user) { User.create!(name: 'User A') }
+        let(:user) { User.create!(name: "User A") }
         let(:user_id) { user.id }
         let!(:existing_sleep_session) { SleepSession.create!({ start_time: Time.current, end_time: Time.current+8.hours, user: user, duration: 60 * 60 * 8 }) }
         let(:id) { existing_sleep_session.id }
@@ -146,7 +146,7 @@ RSpec.describe "Users", type: :request do
 
         run_test! do |response|
           data = JSON.parse(response.body)
-          expect(data['message']).to eq(message)
+          expect(data["message"]).to eq(message)
         end
       end
     end
@@ -157,7 +157,7 @@ RSpec.describe "Users", type: :request do
       parameter name: :id, in: :path, type: :integer, description: "sleep_session_id"
 
       response "204", "no content" do
-        let(:user) { User.create!(name: 'User A') }
+        let(:user) { User.create!(name: "User A") }
         let(:user_id) { user.id }
         let!(:existing_sleep_session) { SleepSession.create!({ start_time: Time.current, end_time: Time.current+8.hours, user: user, duration: 60 * 60 * 8 }) }
         let(:id) { existing_sleep_session.id }

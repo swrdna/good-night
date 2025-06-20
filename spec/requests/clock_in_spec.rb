@@ -47,7 +47,7 @@ RSpec.describe "Clock In", type: :request do
           }
 
 
-        let(:user) { User.create!(name: 'User A') }
+        let(:user) { User.create!(name: "User A") }
         let(:id) { user.id }
         let(:clock_in) { { clock_in: { start_time: Time.current.iso8601 } } }
 
@@ -68,14 +68,14 @@ RSpec.describe "Clock In", type: :request do
             }
           }
 
-        let(:user) { User.create!(name: 'User A') }
+        let(:user) { User.create!(name: "User A") }
         let(:id) { user.id }
         let!(:open_session) { user.sleep_sessions.create!(start_time: 2.hours.ago) }
         let(:clock_in) { { clock_in: { start_time: Time.current.iso8601 } } }
 
         run_test! do |response|
           data = JSON.parse(response.body)
-          expect(data['message']).to eq(message)
+          expect(data["message"]).to eq(message)
           expect(response.status).to eq(422)
         end
       end
