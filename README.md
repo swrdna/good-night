@@ -74,6 +74,20 @@ docker compose up
 docker compose exec api bin/rails db:create db:migrate db:seed
 ```
 
+## Test
+
+Run all test
+
+```bash
+  rspec
+```
+
+Run specific test
+
+```bash
+  rspec path/to/your/test.rb
+```
+
 ## Documentation
 
 ### API
