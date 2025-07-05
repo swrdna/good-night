@@ -7,8 +7,8 @@ class AddIndexToImprovePerformance < ActiveRecord::Migration[7.2]
     add_index :sleep_sessions, :user_id
     add_index :sleep_sessions, :start_time
     add_index :sleep_sessions, :end_time
-    add_index :sleep_sessions, [:user_id, :start_time]
-    add_index :sleep_sessions, [:user_id, :end_time]
+    add_index :sleep_sessions, [ :user_id, :start_time ]
+    add_index :sleep_sessions, [ :user_id, :end_time ]
     add_index :user_follows, :follower_id
     add_index :user_follows, :following_id
   end
