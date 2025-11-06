@@ -12,7 +12,7 @@ group :development, :test do
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
   gem "pry-rails", "~> 0.3.11"
-  gem "rswag", "~> 2.16"
+  gem "rswag", "~> 2.17"
   gem "rswag-specs", "~> 2.16"
   gem "rswag-api", "~> 2.16"
   gem "rswag-ui", "~> 2.16"
